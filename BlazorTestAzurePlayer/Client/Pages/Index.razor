@@ -1,0 +1,24 @@
+﻿@page "/"
+
+<h1>Hello, world!</h1>
+
+<video id="vid1" class="azuremediaplayer amp-default-skin" >
+    <p class="amp-no-js">
+        To view this video please enable JavaScript, and consider upgrading to a web browser that supports HTML5 video
+    </p>
+</video>
+
+@code {
+
+    [Inject]
+    IJSRuntime ThisJsRuntime { get; set; }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await ThisJsRuntime.InvokeVoidAsync("playVideo", "https://amssamples.streaming.mediaservices.windows.net/3b970ae0-39d5-44bd-b3a3-3136143d6435/AzureMediaServicesPromo.ism/manifest");
+        }
+    }
+
+}
